@@ -1,0 +1,108 @@
+# AI 2040 Plan A software — portfolio index
+
+Everything built across one long research-and-engineering pass: what maps to what in
+Plan A's actual structure, what's verified, what genuinely recurred across
+independently-built pieces, and the complete honest list of what's still open. This
+is the document that was missing — everything below existed only spread across a
+very long chat until now.
+
+## The map
+
+| Piece | Plan A source | What it does | Tests |
+|---|---|---|---|
+| `arbiter.jsx` | Verification Plan (workload approval) + Covert AI Projects (chip registry) + Deal Decline (offline licensing) | Unified registry/licensing/workload-review platform. Real ECDSA k-of-n quorum signing, real two-layer statistical audit, hash-chained ledger. | manual + syntax-verified |
+| `trust_composition/` | AI Security Forum open problem: "composing trust roots" | Formal checker for independence claims between verification mechanisms. Found Arbiter's own single-point-of-failure. | 9 |
+| `receipt_schema/` | AI Security Forum open problem: "binding verification to governance" | Machine-checkable receipt schema + validator; flags single-signer schemes claiming multi-party thresholds by name. | 11 |
+| `bandwidth_auction/` | Transparency Plan (outgoing bandwidth auction) | VCG mechanism, truthfulness empirically stress-tested (3,300 attempts, 0 breaks), fairness-cap cost quantified. | 11 |
+| `redaction_pipeline/` | Transparency Plan (Filtered Transparency) | Structural redaction (markers/watchlist/patterns) real and tested; semantic layer built as an honest unfilled interface. | 12 |
+| `exfil_detector/` | Security in Plan A (compression-aware exfiltration) | Entropy + CUSUM detector. Strong on raw payload, honestly blind to unigram-disguised payload, with the exact bandwidth cost of disguising computed. | 14 |
+| `workload_discriminator/` | RFD 027 (training vs. inference discrimination) | Network-traffic-only classifier. 100% clean, 94% against timing-disguised adversarial traffic vs. 0% for a timing-only baseline. | 12 |
+| `distillation_redteam/` | Covert AI Projects (distillation red-teaming) | Query-budget model-extraction mechanics on a real hard task (two-spirals). Active-learning advantage reported as genuinely mixed, not oversold. | 10 |
+| `rhetoric_highlighter/` | AI for Epistemics | Propaganda-technique detector grounded in the IPA's 1937 framework. Real emergency notices false-positive; calm selective framing (Card Stacking) is invisible to it — both demonstrated, not just claimed. | 16 |
+| `compute_accounting/` | RFD 023 + RFD 024 (declaration + FLOP counting) | Exact analytical FLOP formulas (checked against the field's own scaling-law rule of thumb) + spot-check audit whose detection power, unlike aggregate accounting, doesn't degrade with cluster size. | 16 |
+| `handoff_calculator/` | Capability Scaling Strategy | Exact reimplementation, verified against all 12 cells of the actual published table via a fresh re-fetch of the source. | 19 |
+
+## Verified state, as of this pass
+
+**130 of 130 tests pass**, run fresh, all ten Python packages, this session — not
+carried forward as an assumption. Arbiter's JSX re-checked clean with esbuild. No
+scratch or debug files leaked into any output folder. The commands to reproduce this
+yourself are in every individual README; none of them need anything beyond `pip
+install` and a few seconds to a minute each.
+
+## Four things that kept happening
+
+Not planned as a unifying thesis going in — genuinely recurring across pieces built
+independently, weeks apart in conversation-time:
+
+**Declare, commit, spot-check, don't trust aggregate numbers alone.** Arbiter's
+Registry (exhaustive-above-threshold, sampled-below), Arbiter's Licensing (quorum
+signatures, sequence-checked replay), and compute accounting's audit layer (hash-
+committed logs, randomly revealed) are the same mechanism three times, arrived at
+independently each time because it's the same honest answer to "how do you verify
+something without trusting the party being verified."
+
+**Pattern-based defenses work on naive attacks and say so, honestly, when they don't
+on sophisticated ones — with the reason quantified, not asserted.** The exfiltration
+detector (raw payload: 98%+ caught; unigram-disguised: blind, at a computed 1.46×
+bandwidth cost to the attacker), the workload discriminator (regular timing alone:
+100% then 0% under the adversarial test; adding byte-symmetry: 94%), and the
+rhetoric highlighter (loud manipulation: 15 flags; calm Card Stacking: zero) are the
+same finding three times: single-signal, surface-statistical detection has a real,
+nameable ceiling, and multi-signal or sequential accumulation raises it without
+removing it.
+
+**A formal tool got pointed at the thing that built it, and found something real.**
+The trust-composition checker's very first case study was Arbiter's own architecture
+— not a hypothetical — and it found that `client_js_integrity` touched all four of
+Arbiter's trust roots, a real single point of failure. That finding directly caused
+the k-of-n rework, which directly informed the receipt schema's `min_attack=1`
+check. Three pieces, one honest chain of cause and effect, not three unrelated demos.
+
+**Where real judgment was needed and unavailable, an interface got built instead of
+a fake.** No live LLM access in this sandbox meant the redaction pipeline's semantic
+layer and (implicitly) the rhetoric highlighter's Card Stacking gap couldn't be
+filled honestly — so neither pretended to. Both are documented as exactly the seam
+where a production version needs real judgment, not pattern-matching, wired in.
+
+## What's honestly still open
+
+**Needs real hardware or data this environment doesn't have, full stop:**
+ZKP-of-inference at production scale (an open research problem industry-wide, not
+just here); side-channel characterization (RFD 001-004) — needs power/EM traces off
+real GPUs; satellite thermal-anomaly detection — needs licensed imagery; any of the
+physical trust-root hardware (tamper-evident enclosures, guarantee processors,
+optical taps themselves).
+
+**Tractable, genuinely not done, roughly in the order I'd pick them up:**
+- Confidential/secure hyperparameter-sweep service (Security in Plan A) — needs a
+  real secure-enclave or MPC story to be more than a mockup
+- Input-side wardens — cryptographic commitment to prompt distributions, the
+  complement to the exfiltration detector's output-side view
+- RID (rogue internal deployment) detector — a natural `axiomos` extension, blocked
+  on not having deep enough context on axiomos's actual current internals to extend
+  it faithfully rather than guess at its shape
+- Collusion-resistant monitor sting-harness (extends Lumen's `control/monitors.py`)
+- Chip supply-chain provenance ledger's satellite/physical-audit half — the software
+  registry half is already in Arbiter; the physical verification half isn't
+- AI for Epistemics: track-record/promise-scoring engine, privacy-preserving
+  auditing tool, scenario-planning simulator — the rhetoric highlighter covers one
+  corner of this pillar, not the whole thing
+- RFD 011 (nonconfidential red-team/blue-team verification framework), RFD 008
+  (attested logging against real COTS TEE/TPM primitives instead of simulated
+  signing), RFD 039/040 (model fingerprint attestation, model tenancy ledger)
+- Stage 1's target-year tradeoff curves from Capability Scaling Strategy — named
+  explicitly in the handoff calculator's own README as needing takeoff-simulation
+  internals this doesn't have
+
+That's the honest, complete list — not the top-7 I ranked and worked through, all of
+it. "Most ideal" doesn't have a finish line here; the domain is bigger than any one
+pass through it, and every tier above is either a real resource wall or a real next
+project, not a gap in effort.
+
+## If you want to keep going
+
+Each README documents its own real bugs-found, honest limitations, and — where
+relevant — the specific next extension. The tractable list above is ordered by
+what I'd actually pick up next, not alphabetically. Say which, same as every other
+time in this thread.
