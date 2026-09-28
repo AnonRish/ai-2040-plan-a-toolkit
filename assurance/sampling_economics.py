@@ -33,3 +33,36 @@ def compare_to_budget(plan:SamplingPlan)->dict:
         "achieved_confidence":plan.achieved_confidence(),
         "meets_target":plan.verifier_budget_h100e_hours>=required,
     }
+
+def exact_detection_probability(population_size:int, rogue_units:int, sample_size:int)->float:
+    if population_size<=0 or rogue_units<0 or rogue_units>population_size:
+        raise ValueError("invalid population/rogue counts")
+    if not 0<=sample_size<=population_size:
+        raise ValueError("invalid sample size")
+    if rogue_units==0 or sample_size==0:
+        return 0.0
+    if sample_size>population_size-rogue_units:
+        return 1.0
+    # Probability of missing every rogue unit under simple random sampling
+    # without replacement. Use log-gamma to avoid huge integer combinations.
+    log_no_detection=(
+        math.lgamma(population_size-rogue_units+1)
+        - math.lgamma(population_size-rogue_units-sample_size+1)
+        - math.lgamma(population_size+1)
+        + math.lgamma(population_size-sample_size+1)
+    )
+    return -math.expm1(log_no_detection)
+
+def minimum_sample_for_exact_confidence(population_size:int, rogue_units:int, confidence:float)->int:
+    if not 0<confidence<1:
+        raise ValueError("confidence must be in (0,1)")
+    if population_size<=0 or rogue_units<0 or rogue_units>population_size:
+        raise ValueError("invalid population/rogue counts")
+    if rogue_units==0:
+        raise ValueError("cannot detect zero rogue units")
+    lo,hi=0,population_size
+    while lo<hi:
+        mid=(lo+hi)//2
+        if exact_detection_probability(population_size,rogue_units,mid)>=confidence: hi=mid
+        else: lo=mid+1
+    return lo
