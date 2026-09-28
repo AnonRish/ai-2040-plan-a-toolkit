@@ -9,10 +9,10 @@ class Delegation:
 def expected_signature_digest(d): return hashlib.sha256((d.statement_digest()+"|"+d.delegator).encode()).hexdigest()
 def validate_chain(chain,subject):
     if not chain:return {"status":"UNKNOWN","reason":"empty chain"}
-    expected=subject; errors=[]; seen=set()
+    expected=subject; errors=[]; seen_delegators=set()
     for d in reversed(chain):
         if d.delegate!=expected: errors.append("delegate mismatch")
         if d.signature_digest!=expected_signature_digest(d): errors.append("bad signature")
-        if d.delegator in seen or d.delegate in seen: errors.append("delegation cycle")
-        seen|={d.delegator,d.delegate}; expected=d.delegator
+        if d.delegator in seen_delegators: errors.append("delegation cycle")
+        seen_delegators.add(d.delegator); expected=d.delegator
     return {"status":"PASS" if not errors else "FAIL","errors":errors,"root_actor":expected}
