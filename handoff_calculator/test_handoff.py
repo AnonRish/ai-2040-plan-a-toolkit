@@ -1,5 +1,5 @@
 import pytest
-from handoff import evaluate, evaluate_scenario, full_table, breakeven_d_prob, DEFAULTS
+from .handoff import evaluate, evaluate_scenario, full_table, breakeven_d_prob, DEFAULTS
 
 # The published 4x3 table, transcribed exactly from the re-fetched source page.
 # (alignment_scenario, deal_decline_scenario) -> (net_percent, recommendation)
