@@ -20,7 +20,7 @@ on the audit rate and number of rounds, NOT on cluster size.
 """
 
 from dataclasses import dataclass
-from cluster import _log_hash
+from .cluster import _log_hash
 
 
 def aggregate_discrepancy(graph, reports, tolerance=0.02):
