@@ -1,14 +1,22 @@
 
 # Verification Lab
 
-This is a software testbed for the 17 inference-only retrofit workstreams
-listed by the AI Futures Project.
+The lab now covers all 17 AI 2040 inference-retrofit workstreams with named
+software objects, adversarial cases, acceptance criteria and an integrated
+retrofit simulation.
 
-Every workstream now has a named executable object or testable invariant.
-Passing these tests does not establish that a physical optical tap, datacenter,
-memory-wipe system, side-channel defense, inspection regime, or international
-agreement works in reality. Physical claims require measured hardware evidence;
-international claims require independent institutions and field deployment.
+The integrated simulation intentionally reports PARTIAL: software checks can
+demonstrate protocol logic, accounting mathematics and evidence invariants, but
+cannot manufacture physical measurements or international institutional
+authority.
 
-The lab is designed to make those remaining validation targets explicit and
-machine-checkable.
+A useful external evaluation path is therefore:
+
+1. run the software CI;
+2. run the integrated simulator;
+3. attach real bench measurements to the same evidence schema;
+4. have an independent team reproduce the measurements;
+5. promote a workstream only when its external acceptance test is satisfied.
+
+The project should never call a workstream solved just because its simulator
+passes.
