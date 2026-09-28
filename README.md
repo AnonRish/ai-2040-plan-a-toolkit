@@ -108,8 +108,38 @@ what I'd actually pick up next, not alphabetically. Say which, same as every oth
 time in this thread.
 
 
-## Plan A integration layer
+## RVP-1 research package
 
-The repository now also contains `plan_a_protocol/` (canonical evidence/receipt and workload-manifest primitives) and `embedded_audit/` (Track 1 challenge/evidence/receipt loop plus protocol red-team tests). `demo_plan_a_tracks.py` exercises Track 1 and Track 4 together, and `.github/workflows/plan-a-software.yml` runs the new tests in CI.
+This repository now includes a unified reproducible verification package spanning Tracks 1-4 and the 17 inference-retrofit workstreams.
 
-Cross-repository integration is documented in `PLAN_A_INTEGRATION.md`: Track 2 is wired in Frontier Verify's experimental recomputation v2 path, while Track 3's public-data repository contains the conservative residual-compute bound engine.
+| Layer | Package surface |
+|---|---|
+| Normative protocol | RVP-1.md, formal state machine, Python reference model |
+| Network observation | raw Ethernet/IPv4/TCP/UDP parser, whitelist, reassembly, pcap/live capture |
+| Recomputation | commitments, sampling economics, deterministic kernels, signed receipts |
+| Adversarial verification | hostile-prover benchmark and integrated red-team matrix |
+| Track 3 | interval accounting, tail-unit sampling/tracing, residual-bound interfaces |
+| Track 4 | workload manifests, Merkle proofs, cryptographic proof envelope |
+| Assurance | conservative failure composition and evidence-provenance promotion gates |
+| Hardware | measurement schema plus Linux capture adapter and bench acceptance targets |
+| Deployment | asset lifecycle, installation acceptance and field-deployment playbook |
+| Replication | reproducibility manifest, benchmark outputs, artifact hashes and handoff protocol |
+
+The package deliberately distinguishes software evidence from physical and international evidence. A passing software test never promotes itself into a hardware or field claim.
+
+### Reproduce locally
+
+PowerShell:
+
+    python -m pip install -r requirements.txt
+    python -m pytest plan_a_protocol/tests embedded_audit/tests verification_lab/tests frame_processor/tests hostile_prover/tests formal/test_reference_model.py benchmarks/test_benchmark.py benchmarks/test_scorecard.py benchmarks/test_compare.py compute_accounting/test_interval_ledger.py gateway/test_policy.py gateway/test_active_contract.py provenance/test_gate.py assurance/test_compose.py assurance/test_sampling_economics.py crypto/test_proof_envelope.py hardware/test_live_capture_import.py deployment/test_readiness.py telemetry/test_consistency.py storage/test_weight_path.py redteam/test_scenarios.py redteam/test_integrated.py track3/test_tail_audit.py -q
+
+Generated evidence artifacts are produced by the same workflow used by GitHub Actions.
+
+### Independent evaluation
+
+Start with EVALUATOR_BRIEF.md, BENCHMARK_PROTOCOL.md, REPLICATION_HANDOFF.md, and FIELD_DEPLOYMENT_PLAYBOOK.md. Publish raw artifacts and environment metadata alongside every physical result.
+
+### External baseline discipline
+
+benchmarks/external_baselines/ contains attributed published baseline records. Those values are not presented as RVP-1 measurements.
