@@ -6,7 +6,7 @@ now produces (3-of-5 quorum, real field correspondence), and four broken
 ones -- each violating exactly one thing, so it's clear which check caught it.
 """
 
-from validator import validate
+from .validator import validate
 
 import hashlib
 
