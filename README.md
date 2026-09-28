@@ -106,3 +106,10 @@ Each README documents its own real bugs-found, honest limitations, and — where
 relevant — the specific next extension. The tractable list above is ordered by
 what I'd actually pick up next, not alphabetically. Say which, same as every other
 time in this thread.
+
+
+## Plan A integration layer
+
+The repository now also contains `plan_a_protocol/` (canonical evidence/receipt and workload-manifest primitives) and `embedded_audit/` (Track 1 challenge/evidence/receipt loop plus protocol red-team tests). `demo_plan_a_tracks.py` exercises Track 1 and Track 4 together, and `.github/workflows/plan-a-software.yml` runs the new tests in CI.
+
+Cross-repository integration is documented in `PLAN_A_INTEGRATION.md`: Track 2 is wired in Frontier Verify's experimental recomputation v2 path, while Track 3's public-data repository contains the conservative residual-compute bound engine.
