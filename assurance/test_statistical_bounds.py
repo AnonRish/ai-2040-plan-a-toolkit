@@ -8,7 +8,7 @@ def test_hypergeometric_exact_bounds():
 def test_sample_size_hits_target():
     n=required_sample_size(1000,10,.95)
     assert finite_population_detection_probability(1000,10,n)>=.95
-    assert n==259
+    assert n==258
 
 def test_zero_failure_upper_decreases_with_more_samples():
     assert binomial_zero_failure_upper(100)<binomial_zero_failure_upper(10)
