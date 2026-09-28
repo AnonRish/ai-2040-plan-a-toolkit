@@ -2,8 +2,8 @@ import json
 import copy
 import pytest
 
-from validator import validate, schema_errors, quorum_errors, is_consummated
-from examples import (
+from .validator import validate, schema_errors, quorum_errors, is_consummated
+from .examples import (
     VALID_RECEIPT, broken_missing_quorum, broken_duplicate_signer,
     broken_single_signer_high_threshold, broken_missing_governance_binding,
 )
