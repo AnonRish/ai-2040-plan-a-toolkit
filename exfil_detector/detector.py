@@ -29,7 +29,7 @@ EPS = 1e-9
 
 
 def build_chunk_dataset(rng, n_per_class, payload_kind="raw", chunk_length=180):
-    from generators import generate_clean_chunk, generate_raw_payload_chunk, generate_disguised_payload_chunk
+    from .generators import generate_clean_chunk, generate_raw_payload_chunk, generate_disguised_payload_chunk
     gen_payload = generate_raw_payload_chunk if payload_kind == "raw" else generate_disguised_payload_chunk
     X, y = [], []
     for _ in range(n_per_class):
