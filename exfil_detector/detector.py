@@ -22,8 +22,8 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import roc_auc_score, accuracy_score
 
-from generators import generate_session
-from features import feature_vector, FEATURE_NAMES
+from .generators import generate_session
+from .features import feature_vector, FEATURE_NAMES
 
 EPS = 1e-9
 
