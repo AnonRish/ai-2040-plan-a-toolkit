@@ -1,10 +1,10 @@
 # AI 2040 Plan A software — portfolio index
 
-Everything built across one long research-and-engineering pass: what maps to what in
-Plan A's actual structure, what's verified, what genuinely recurred across
-independently-built pieces, and the complete honest list of what's still open. This
-is the document that was missing — everything below existed only spread across a
-very long chat until now.
+Reference implementations and red-team harnesses for pieces of the AI Futures Project's
+AI 2040: Plan A verification agenda, with a map from each piece to the Plan A section it
+addresses, what is tested, and what is still open. To check the claims yourself:
+`pip install -r requirements-rvp1-lock.txt && pip install -e . && python -m pytest -q`
+(282 tests, about a minute).
 
 ## The map
 
