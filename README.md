@@ -24,11 +24,10 @@ very long chat until now.
 
 ## Verified state, as of this pass
 
-**130 of 130 tests pass**, run fresh, all ten Python packages, this session — not
-carried forward as an assumption. Arbiter's JSX re-checked clean with esbuild. No
-scratch or debug files leaked into any output folder. The commands to reproduce this
-yourself are in every individual README; none of them need anything beyond `pip
-install` and a few seconds to a minute each.
+**CI is the source of truth for test status.** The RVP-1 suite is continuously
+expanded and run on GitHub Actions; the exact passing-test count is intentionally
+not hard-coded here. Reproducibility commands are documented below, and completed
+CI runs are retained as the auditable record.
 
 ## Four things that kept happening
 
