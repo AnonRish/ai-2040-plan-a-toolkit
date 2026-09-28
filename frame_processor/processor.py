@@ -117,7 +117,7 @@ class PcapReader:
             if magic==b"\xd4\xc3\xb2\xa1": endian="<"
             elif magic==b"\xa1\xb2\xc3\xd4": endian=">"
             else: raise ValueError("unsupported pcap magic")
-            _,_,_,_,_,linktype=struct.unpack(endian+"IHHIIII",gh)
+            _,_,_,_,_,_,linktype=struct.unpack(endian+"IHHIIII",gh)
             if linktype!=1:raise ValueError("only Ethernet pcap is supported")
             while True:
                 ph=fh.read(16)
