@@ -1,3 +1,4 @@
+
 # RVP-1 — Reproducible Verification Protocol
 
 RVP-1 is the canonical package entry point.
@@ -13,9 +14,9 @@ result consistent with the committed inputs and policy.
 Completeness claim: the observation boundary is demonstrably complete for the
 declared population and channel model.
 
-These claims must not be conflated. A valid signature proves integrity, not
-that the physical observation was truthful. A passing sample proves the sample,
-not zero probability of an unsampled attack.
+These claims must not be conflated. A valid signature proves integrity, not that
+the physical observation was truthful. A passing sample proves the sample, not
+zero probability of an unsampled attack.
 
 ## Required lifecycle
 
@@ -35,3 +36,17 @@ committed. Missing observations yield UNKNOWN, not PASS.
 
 Promotion between levels requires new evidence; no level is inferred from the
 one below it.
+
+## Composed assurance
+
+Multiple controls are composed with a union bound by default. Multiplication of
+failure probabilities is permitted only when independence has been explicitly
+certified and common-mode dependencies are absent. This prevents a stack of
+nominally independent controls from receiving unjustified confidence.
+
+## Cryptographic proof boundary
+
+The crypto package defines a machine-readable proof envelope and statement
+identity. It does not pretend a generic hash or signature is a zero-knowledge
+proof. A real proof system must supply and independently verify the proof
+artifact.
