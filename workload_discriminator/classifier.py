@@ -12,11 +12,11 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, precision_recall_fscore_support, roc_auc_score, confusion_matrix
 
-from traffic_gen import (
+from .traffic_gen import (
     generate_training_session, generate_inference_session,
     generate_adversarial_regular_inference_session,
 )
-from features import feature_vector, FEATURE_NAMES
+from .features import feature_vector, FEATURE_NAMES
 
 LABEL_TRAINING, LABEL_INFERENCE = 1, 0  # 1 = training workload, 0 = inference workload
 
