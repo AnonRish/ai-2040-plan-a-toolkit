@@ -1,7 +1,7 @@
 import re
 import pytest
 
-from redactor import redact, PatternRule, WatchlistRule, StubKeywordSemanticFlagger
+from .redactor import redact, PatternRule, WatchlistRule, StubKeywordSemanticFlagger
 
 EMAIL_RULE = PatternRule("email", r"[\w.+-]+@[\w-]+\.[\w.-]+", "email_address")
 ID_RULE = PatternRule("employee_id", r"\bEMP-\d{4,6}\b", "internal_identifier")
