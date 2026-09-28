@@ -27,6 +27,7 @@ jobs:
             benchmark_result.json
             adversarial_results.json
             capture_benchmark_result.json
+            capture_fixture.pcap
             retrofit_readiness_report.json
             replication_manifest.json
           if-no-files-found: error
