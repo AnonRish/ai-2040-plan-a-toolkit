@@ -1,4 +1,4 @@
-from trust_composition import TrustRoot, min_attack, resource_fanout, analyze
+from .trust_composition import TrustRoot, min_attack, resource_fanout, analyze
 
 
 def test_no_shared_dependencies_needs_full_threshold():
