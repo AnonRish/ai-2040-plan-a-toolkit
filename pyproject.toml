@@ -16,5 +16,5 @@ include = [
   "provenance*","assurance*","crypto*","hardware*","deployment*","telemetry*",
   "storage*","redteam*","track3*","company_audit*","physical*",
   "workload_policy*","governance*","workload_execution*","channel_budget*",
-  "model_registry*","evidence_graph*","input_warden*"
+  "model_registry*","evidence_graph*","input_warden*","compute_meter*"
 ]
