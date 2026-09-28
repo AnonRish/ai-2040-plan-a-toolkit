@@ -1,5 +1,5 @@
-from rhetoric import analyze
-from render import render_html
+from .rhetoric import analyze
+from .render import render_html
 
 # All examples concern a fictional town's recycling ordinance -- deliberately
 # low-stakes and invented, so the point is the rhetorical pattern, not any
