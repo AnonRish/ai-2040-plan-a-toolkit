@@ -2,13 +2,13 @@ import math
 import numpy as np
 import pytest
 
-from generators import (
+from .generators import (
     CLEAN_ENTROPY_BITS_PER_CHAR, RAW_PAYLOAD_ENTROPY_BITS_PER_CHAR, BASE64_ALPHABET,
     generate_clean_chunk, generate_raw_payload_chunk, generate_disguised_payload_chunk,
     generate_session, shannon_entropy_bits,
 )
-from features import empirical_entropy_bits, base64_fraction, feature_vector
-from detector import (
+from .features import empirical_entropy_bits, base64_fraction, feature_vector
+from .detector import (
     train_classifier, calibrate_k, calibrate_threshold, evaluate_detection,
     evaluate_false_positive_rate, run_cusum,
 )
