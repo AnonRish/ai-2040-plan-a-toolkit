@@ -3,9 +3,9 @@ import pytest
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 
-from teacher import make_two_spirals, train_teacher, confirm_task_is_nontrivial
-from extraction import random_extraction, active_extraction, evaluate_student, make_student
-from defenses import NoisyTeacher, legitimate_user_cost
+from .teacher import make_two_spirals, train_teacher, confirm_task_is_nontrivial
+from .extraction import random_extraction, active_extraction, evaluate_student, make_student
+from .defenses import NoisyTeacher, legitimate_user_cost
 
 
 @pytest.fixture(scope="module")
