@@ -96,7 +96,7 @@ def build_audit_receipt(audit: AuditRound, signers, quorum: int):
         subject={"subject_id": audit.subject_id, "audit_id": audit.audit_id},
         claim={"statement": "Declared audit evidence satisfies the specified audit scope.", "basis": "T1 embedded-audit protocol with verifier-issued challenge"},
         evidence_chain={"root_hash": compute_evidence_hash(records), "evidence_ids": [e.evidence_id for e in audit.evidence]},
-        verification={"status": result["status"], "procedure_id": "T1-EMBEDDED-AUDIT-V1", "details": result},
+        verification={"status": result["status"], "procedure_id": "T1-EMBEDDED-AUDIT-V1", "details": {**result, "challenge_nonce_revealed": audit.nonce}},
         governance_binding={"instrument_ref": "LOCAL_OR_TREATY_INSTRUMENT_TO_BE_BOUND", "retention_days": 3650, "dispute_process": "append-only correction with superseding receipt"},
         signers=signers,
         quorum=quorum,
