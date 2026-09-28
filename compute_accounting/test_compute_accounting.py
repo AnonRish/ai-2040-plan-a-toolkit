@@ -1,9 +1,9 @@
 import numpy as np
 import pytest
 
-from compute_graph import MatMul, Linear, Attention, Conv2D, ComputeGraph, transformer_block_graph
-from cluster import run_cluster, partition_ops, sha256_hex
-from verification import aggregate_discrepancy, audit_node, spot_check_round, detection_probability_over_rounds
+from .compute_graph import MatMul, Linear, Attention, Conv2D, ComputeGraph, transformer_block_graph
+from .cluster import run_cluster, partition_ops, sha256_hex
+from .verification import aggregate_discrepancy, audit_node, spot_check_round, detection_probability_over_rounds
 
 
 def test_matmul_flops_formula():
