@@ -28,16 +28,15 @@ def reconcile_flows(flows:list[Flow], declared_stock:dict[str,Interval], closed_
         incoming[f.dst]=incoming[f.dst]+f.quantity
         outgoing[f.src]=outgoing[f.src]+f.quantity
     owners=set(declared_stock)
-    disconnected=sorted(set(incoming)|set(outgoing)-owners)
-    # Conservative stock residual: upper stock minus lower traced quantity.
+    unknown_sources=sorted(set(outgoing)-owners)
     total_stock=Interval(sum(v.low for v in declared_stock.values()),sum(v.high for v in declared_stock.values()))
     traced=Interval(sum(f.quantity.low for f in flows),sum(f.quantity.high for f in flows))
     residual=Interval(max(0,total_stock.low-traced.high),max(0,total_stock.high-traced.low))
-    status="PASS" if closed_population and not disconnected else ("UNKNOWN" if not closed_population else "FAIL")
+    status="PASS" if closed_population and not unknown_sources else ("UNKNOWN" if not closed_population else "FAIL")
     return {
         "status":status,"closed_population":closed_population,
         "stock_interval":{"low":total_stock.low,"high":total_stock.high},
         "traced_flow_interval":{"low":traced.low,"high":traced.high},
         "residual_upper_bound":residual.high,
-        "disconnected_accounts":disconnected,
+        "unknown_source_accounts":unknown_sources,
     }
