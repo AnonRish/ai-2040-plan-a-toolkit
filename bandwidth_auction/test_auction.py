@@ -2,7 +2,7 @@ import random
 import itertools
 import pytest
 
-from auction import (
+from .auction import (
     Bid, efficient_allocation, vcg_payments, run_auction, welfare, utility,
     efficient_allocation_capped, vcg_payments_capped,
 )
