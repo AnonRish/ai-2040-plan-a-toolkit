@@ -1,10 +1,10 @@
 import pytest
-from rhetoric import (
+from .rhetoric import (
     analyze, detect_bandwagon, detect_unsourced_authority, detect_loaded_language,
     detect_absolutist_language, detect_false_urgency, detect_repetition, Span,
 )
-from render import render_html, _non_overlapping
-from run_demo import NEUTRAL, MANIPULATIVE, FALSE_POSITIVE_URGENT_BUT_REAL, FALSE_NEGATIVE_CALM_BUT_ONE_SIDED
+from .render import render_html, _non_overlapping
+from .run_demo import NEUTRAL, MANIPULATIVE, FALSE_POSITIVE_URGENT_BUT_REAL, FALSE_NEGATIVE_CALM_BUT_ONE_SIDED
 
 
 def test_neutral_text_gets_no_flags():
