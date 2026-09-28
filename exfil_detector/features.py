@@ -18,7 +18,7 @@ base64_fraction      -- fraction of characters drawn from the base64
 import math
 from collections import Counter
 
-from generators import BASE64_ALPHABET
+from .generators import BASE64_ALPHABET
 
 BASE64_SET = set(BASE64_ALPHABET)
 
