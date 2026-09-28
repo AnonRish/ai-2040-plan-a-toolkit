@@ -3,7 +3,7 @@ from pathlib import Path
 import json
 
 REQUIRED_FILES=('RVP-1.md','BENCHMARK_PROTOCOL.md','EVALUATOR_BRIEF.md','verification_lab/workstreams.json','.github/workflows/rvp-conformance.yml','scripts/run_rvp1.ps1')
-REQUIRED_PACKAGES=('plan_a_protocol','embedded_audit','verification_lab','frame_processor','hostile_prover','formal','benchmarks','compute_accounting','gateway','provenance','assurance','crypto','hardware','deployment','telemetry','storage','redteam','track3','adversary','capture_benchmark')
+REQUIRED_PACKAGES=('adversary','assurance','bandwidth_auction','benchmarks','capture_benchmark','challenge_scheduler','channel_budget','company_audit','compute_accounting','compute_meter','crypto','deployment','distillation_redteam','embedded_audit','evidence_graph','exfil_detector','formal','frame_processor','gateway','governance','handoff_calculator','hardware','hostile_prover','identity','input_warden','location','model_registry','passport','physical','plan_a_protocol','provenance','receipt_schema','redaction_pipeline','redteam','replication','rhetoric_highlighter','storage','supply_chain','telemetry','track3','trust_composition','verification_lab','workload_discriminator','workload_execution','workload_policy')
 
 def validate_repository(root:str='.'):
     base=Path(root); errors=[]
