@@ -4,3 +4,4 @@ matplotlib
 pytest
 jsonschema
 networkx
+cryptography>=42.0
