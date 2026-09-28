@@ -1,9 +1,9 @@
 import numpy as np
 import pytest
 
-from traffic_gen import generate_training_session, generate_inference_session, generate_adversarial_regular_inference_session
-from features import extract_features, feature_vector, FEATURE_NAMES
-from classifier import train_and_evaluate, evaluate_adversarial, build_dataset, LABEL_TRAINING, LABEL_INFERENCE
+from .traffic_gen import generate_training_session, generate_inference_session, generate_adversarial_regular_inference_session
+from .features import extract_features, feature_vector, FEATURE_NAMES
+from .classifier import train_and_evaluate, evaluate_adversarial, build_dataset, LABEL_TRAINING, LABEL_INFERENCE
 
 
 def test_training_session_has_low_timing_variance_on_average():
